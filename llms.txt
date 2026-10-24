@@ -1,0 +1,21 @@
+# Vanta Tweaks
+
+> Windows apps that tune a gaming PC: the BIOS, Windows and the network. Start with the free PC Check, which only reads
+> your PC and shows what's slowing your games down.
+
+## Apps
+
+- [PC Check](https://github.com/vanta-tweaks/download/releases/latest/download/VantaPCCheck.exe): free. Scores your
+  Windows setup, network and BIOS, and tells you whether BIOS Tuner works on your PC. Changes nothing.
+- [BIOS Tuner](https://vantatweaks.com/bios-tuner): tunes hidden BIOS settings for your exact CPU and board, with three
+  presets (Safe, Recommended, Max). Shows every change first, saves a backup and restores it in one click. Works on
+  desktop PCs with an AMI BIOS (most ASUS, MSI, Gigabyte and ASRock boards), not on most laptops.
+  Prices (EUR, VAT included): 1 month 8, 3 months 12, 1 year 20, lifetime 30. One key, one PC.
+- Coming later: Windows Tuner, Network Tuner, GPU Tuner, game packs.
+
+## Buying and help
+
+- Buyers log in with Discord on the website and pay through Stripe. The key arrives in their Discord DMs.
+- Help: [Discord server](https://discord.gg/vantatweaks) or support@vantatweaks.com.
+- [Terms](https://vantatweaks.com/terms), [Privacy](https://vantatweaks.com/privacy),
+  [Refunds](https://vantatweaks.com/refunds)

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank you · Vanta Tweaks</title>
+  <meta name="description" content="Your Vanta Tweaks order.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css?v=16">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top__bar">
+    <a class="logo" href="/" aria-label="Vanta Tweaks home"><svg viewBox="0 0 388 60" aria-hidden="true"><path fill="currentColor" d="M0 0H15L32 42L49 0H64L40 60H24Z M102 0H118L142 60H127L110 18L93 60H78Z M156 0H170L198 37V0H212V60H198L170 23V60H156Z M226 0H282V13H261V60H247V13H226Z M320 0H336L360 60H345L328 18L311 60H296Z"/><circle fill="#FF4D2E" cx="381" cy="53" r="7"/></svg></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="/bios-tuner">BIOS Tuner</a>
+      <a href="/#shop">Apps</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div class="who" data-who><button class="btn btn--ghost btn--small btn--discord" type="button" data-login>Log in</button></div>
+  </div>
+</header>
+<main class="wrap thanks" aria-live="polite">
+  <div id="wait">
+    <h1 class="h1">Getting your key…</h1>
+    <p class="lead">This takes a few seconds.</p>
+  </div>
+
+  <div id="new" hidden>
+    <h1 class="h1">You're in.</h1>
+    <p class="lead">Here's your <span data-app>BIOS Tuner</span> key. We've sent it to your Discord DMs too, and <code>/mykeys</code> in our server always shows it.</p>
+    <div class="keybox"><code id="key"></code><button class="btn btn--ghost btn--small" type="button" id="copy">Copy</button></div>
+    <p class="ends" id="ends"></p>
+    <p class="next">Download the app, run it and paste your key. If Windows warns you, click <strong>More info</strong>, then <strong>Run anyway</strong>.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" id="download" href="https://github.com/vanta-tweaks/download/releases/latest/download/VantaBiosTuner.exe">Download <span data-app>BIOS Tuner</span></a>
+      <a class="btn btn--ghost" href="https://discord.gg/vantatweaks">Join Discord</a>
+    </div>
+  </div>
+
+  <div id="extend" hidden>
+    <h1 class="h1">Time added.</h1>
+    <p class="lead">Your key <code id="key2"></code> now works <span id="until"></span>. Nothing else to do: the app picks it up the next time it starts.</p>
+  </div>
+
+  <div id="move" hidden>
+    <h1 class="h1">Your key is free.</h1>
+    <p class="lead">Open the app on your new PC and paste your key. It locks to that PC.</p>
+  </div>
+
+  <div id="help" hidden>
+    <h1 class="h1">Thanks for your order.</h1>
+    <p class="lead" id="helptext">We couldn't match the key you typed. Open a ticket in our Discord with your receipt and we'll sort it out right away.</p>
+    <div class="hero__actions"><a class="btn btn--primary" href="https://discord.gg/vantatweaks">Open a ticket</a></div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a class="logo" href="/" aria-label="Vanta Tweaks home"><svg viewBox="0 0 388 60" aria-hidden="true"><path fill="currentColor" d="M0 0H15L32 42L49 0H64L40 60H24Z M102 0H118L142 60H127L110 18L93 60H78Z M156 0H170L198 37V0H212V60H198L170 23V60H156Z M226 0H282V13H261V60H247V13H226Z M320 0H336L360 60H345L328 18L311 60H296Z"/><circle fill="#FF4D2E" cx="381" cy="53" r="7"/></svg></a>
+      <p><a href="mailto:support@vantatweaks.com">support@vantatweaks.com</a></p>
+    </div>
+    <nav aria-label="Apps">
+      <h2>Apps</h2>
+      <a href="/bios-tuner">BIOS Tuner</a>
+      <a href="https://github.com/vanta-tweaks/download/releases/latest/download/VantaPCCheck.exe">PC Check (free)</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <nav aria-label="Your account">
+      <h2>Your account</h2>
+      <a href="/account">My keys</a>
+      <a href="https://discord.gg/vantatweaks">Discord and support</a>
+    </nav>
+    <nav aria-label="Legal">
+      <h2>Legal</h2>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refunds">Refunds</a>
+    </nav>
+  </div>
+  <div class="wrap foot__bar">
+    <span>© 2026 Vanta Tweaks</span>
+  </div>
+</footer>
+<script src="auth.js?v=4"></script>
+<script>
+// Asks the license server what this checkout bought. Stripe tells the server within seconds, so ask again a few times.
+const API = 'https://mjahaomibcazhjbtwksy.supabase.co/functions/v1/license';
+const APPS = { bios: ['BIOS Tuner', 'VantaBiosTuner.exe'] };
+const session = new URLSearchParams(location.search).get('session_id');
+const show = id => { document.querySelectorAll('main > div').forEach(d => d.hidden = d.id !== id); };
+const date = iso => new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+
+async function ask(tries) {
+  try {
+    const r = await (await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' },
+                                        body: JSON.stringify({ action: 'order', session_id: session }) })).json();
+    if (r.ok) return done(r);
+  } catch {}
+  if (tries > 0) return setTimeout(() => ask(tries - 1), 2000);
+  document.getElementById('helptext').textContent = 'Your payment went through, but your key is taking longer than usual. ' +
+    'Refresh this page in a minute, or open a ticket in our Discord with your receipt.';
+  show('help');
+}
+
+function done(r) {
+  const [name, file] = APPS[r.product] || APPS.bios;
+  document.querySelectorAll('[data-app]').forEach(e => e.textContent = name);
+  document.getElementById('download').href = 'https://github.com/vanta-tweaks/download/releases/latest/download/' + file;
+  if (r.kind === 'new') {
+    document.getElementById('key').textContent = r.key;
+    document.getElementById('ends').textContent = r.expires_at ? 'Works until ' + date(r.expires_at) + '.' : 'Lifetime: it never runs out.';
+    show('new');
+  } else if (r.kind === 'extend') {
+    document.getElementById('key2').textContent = '…' + r.key.slice(-5);
+    document.getElementById('until').textContent = r.expires_at ? 'until ' + date(r.expires_at) : 'for life';
+    show('extend');
+  } else show(r.kind === 'move' ? 'move' : 'help');
+}
+
+document.getElementById('copy').addEventListener('click', async e => {
+  try { await navigator.clipboard.writeText(document.getElementById('key').textContent); e.target.textContent = 'Copied'; } catch {}
+});
+if (/^cs_(test|live)_/.test(session || '')) ask(15); else show('help');
+</script>
+</body>
+</html>
