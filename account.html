@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My keys · Vanta Tweaks</title>
+  <meta name="description" content="Your Vanta Tweaks license keys.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css?v=42">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top__bar">
+    <a class="logo" href="/" aria-label="Vanta Tweaks home"><svg viewBox="0 0 388 60" aria-hidden="true"><path fill="currentColor" d="M0 0H15L32 42L49 0H64L40 60H24Z M102 0H118L142 60H127L110 18L93 60H78Z M156 0H170L198 37V0H212V60H198L170 23V60H156Z M226 0H282V13H261V60H247V13H226Z M320 0H336L360 60H345L328 18L311 60H296Z"/><circle fill="#FF4D2E" cx="381" cy="53" r="7"/></svg></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="/#apps">Apps</a>
+      <a href="/pc-check">PC Check</a>
+      <a href="/bios-tuner">BIOS Tuner</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <a class="btn btn--primary btn--small top__buy" href="/#shop">Get BIOS Tuner</a>
+    <div class="who" data-who><button class="btn btn--ghost btn--small btn--discord" type="button" data-login>Log in</button></div>
+  </div>
+</header>
+<main class="wrap account" aria-live="polite">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">My keys</span></nav>
+  <div id="wait" class="center"><div class="spinner" aria-hidden="true"></div></div>
+
+  <div id="out" class="center" hidden>
+    <h1 class="h1">My keys</h1>
+    <p class="lead">Log in with Discord to see your keys, when they end, and where to download your apps.</p>
+    <button class="btn btn--primary btn--discord" type="button" id="login">Log in with Discord</button>
+  </div>
+
+  <div id="in" class="stack" hidden>
+    <div class="account__head">
+      <img id="avatar" alt="" width="64" height="64">
+      <div><h1 class="h1">My keys</h1><p>Logged in with Discord as <strong id="name"></strong></p></div>
+    </div>
+    <div class="banner" id="notmember" hidden>
+      <span>You're not in our Discord yet. Join it for your app's channel, updates and help.</span>
+      <a class="btn btn--primary btn--small btn--discord" href="https://discord.gg/vantatweaks">Join Discord</a>
+    </div>
+    <div class="keys" id="keys"></div>
+    <div class="box empty" id="none" hidden>
+      <h2 class="h2">No keys yet</h2>
+      <p>Keys you buy while logged in with this Discord account show up here.<br>Bought one before? Type <strong>/redeem</strong> with your key in our Discord to link it.</p>
+      <a class="btn btn--primary" href="/#shop">Go to the shop</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a class="logo" href="/" aria-label="Vanta Tweaks home"><svg viewBox="0 0 388 60" aria-hidden="true"><path fill="currentColor" d="M0 0H15L32 42L49 0H64L40 60H24Z M102 0H118L142 60H127L110 18L93 60H78Z M156 0H170L198 37V0H212V60H198L170 23V60H156Z M226 0H282V13H261V60H247V13H226Z M320 0H336L360 60H345L328 18L311 60H296Z"/><circle fill="#FF4D2E" cx="381" cy="53" r="7"/></svg></a>
+      <p><a href="mailto:support@vantatweaks.com">support@vantatweaks.com</a></p>
+    </div>
+    <nav aria-label="Apps">
+      <h2>Apps</h2>
+      <a href="/bios-tuner">BIOS Tuner</a>
+      <a href="/pc-check">PC Check (free)</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <nav aria-label="Your account">
+      <h2>Your account</h2>
+      <a href="/account">My keys</a>
+      <a href="https://discord.gg/vantatweaks">Discord and support</a>
+    </nav>
+    <nav aria-label="Legal">
+      <h2>Legal</h2>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refunds">Refunds</a>
+    </nav>
+  </div>
+  <div class="wrap foot__bar">
+    <span>© 2026 Vanta Tweaks</span>
+  </div>
+</footer>
+
+<template id="keycard">
+  <article class="box keycard">
+    <div class="keycard__top"><h2 class="h3" data-app></h2><span class="status" data-status></span></div>
+    <p class="keycard__ends" data-ends></p>
+    <div class="keybox"><code data-key></code><button class="btn btn--ghost btn--small" type="button" data-copy>Copy</button></div>
+    <div class="keycard__actions">
+      <a class="btn btn--primary btn--small" data-download>Download</a>
+      <a class="btn btn--ghost btn--small" href="/#shop" data-more>Add time</a>
+    </div>
+    <p class="keycard__hint" data-hint hidden>Your key is copied. Pick a plan, and at checkout paste it in the box "Have a key? Paste it to add time": the time goes onto this key. <a class="link" href="/#shop">Go to the shop →</a></p>
+  </article>
+</template>
+
+<script src="auth.js?v=4"></script>
+<script>
+// Your keys, read with your Discord login (auth.js). Only you see them: the server checks the login with Discord first.
+const APPS = { bios: ['BIOS Tuner', 'VantaBiosTuner.exe'], network: ['Network Tuner'], gpu: ['GPU Tuner'], windows: ['Windows Tuner'], '*': ['All apps'] };
+const show = id => document.querySelectorAll('main > div').forEach(d => d.hidden = d.id !== id);
+const date = iso => new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+const copy = async (text, btn) => { try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; } catch {} };
+
+function card(k) {
+  const el = document.getElementById('keycard').content.cloneNode(true);
+  const q = s => el.querySelector(`[data-${s}]`);
+  const [name, file] = APPS[k.products[0]] || [k.products.join(', ')];
+  const ended = k.expires_at && new Date(k.expires_at) < new Date();
+  q('app').textContent = k.products.length > 1 ? k.products.map(p => (APPS[p] || [p])[0]).join(' + ') : name;
+  q('status').textContent = k.active ? 'Active' : ended ? 'Ended' : 'Turned off';
+  if (k.active) q('status').classList.add('status--on');
+  q('ends').textContent = !k.expires_at ? 'Lifetime: it never runs out.'
+    : (ended ? 'Ended on ' : 'Works until ') + date(k.expires_at) + '.';
+  q('key').textContent = k.key;
+  q('copy').onclick = e => copy(k.key, e.target);
+  if (file) q('download').href = 'https://github.com/vanta-tweaks/download/releases/latest/download/' + file;
+  else q('download').remove();
+  const hint = q('hint');
+  if (!k.expires_at || (!k.active && !ended)) q('more').remove();   // lifetime has nothing to add; turned off = a ticket
+  else q('more').onclick = e => { e.preventDefault(); copy(k.key, e.target); hint.hidden = false; };
+  return el;
+}
+
+(async () => {
+  document.getElementById('login').onclick = () => Vanta.login({ after: '/account' });
+  const s = Vanta.session();
+  const r = s && await Vanta.me(s.token);
+  if (!r) return show('out');
+  document.getElementById('avatar').src = Vanta.avatar({ ...s, avatar: r.avatar });
+  document.getElementById('name').textContent = r.name;
+  document.getElementById('notmember').hidden = r.member;
+  document.getElementById('keys').replaceChildren(...r.keys.map(card));
+  document.getElementById('none').hidden = r.keys.length > 0;
+  show('in');
+})();
+</script>
+</body>
+</html>

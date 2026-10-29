@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buy · Vanta Tweaks</title>
+  <meta name="description" content="Buy a Vanta Tweaks app.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css?v=42">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top__bar">
+    <a class="logo" href="/" aria-label="Vanta Tweaks home"><svg viewBox="0 0 388 60" aria-hidden="true"><path fill="currentColor" d="M0 0H15L32 42L49 0H64L40 60H24Z M102 0H118L142 60H127L110 18L93 60H78Z M156 0H170L198 37V0H212V60H198L170 23V60H156Z M226 0H282V13H261V60H247V13H226Z M320 0H336L360 60H345L328 18L311 60H296Z"/><circle fill="#FF4D2E" cx="381" cy="53" r="7"/></svg></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="/#apps">Apps</a>
+      <a href="/pc-check">PC Check</a>
+      <a href="/bios-tuner">BIOS Tuner</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <a class="btn btn--primary btn--small top__buy" href="/#shop">Get BIOS Tuner</a>
+    <div class="who" data-who><button class="btn btn--ghost btn--small btn--discord" type="button" data-login>Log in</button></div>
+  </div>
+</header>
+<main class="wrap thanks" aria-live="polite">
+  <div id="wait">
+    <div class="spinner" aria-hidden="true"></div>
+    <p class="lead">One moment…</p>
+  </div>
+
+  <div id="start" hidden>
+    <span class="eyebrow">Step 1 of 2</span>
+    <h1 class="h1" id="what">BIOS Tuner</h1>
+    <p class="plan-line" id="what2"></p>
+    <p class="lead" id="startlead">Log in with Discord first. Your key comes to your Discord DMs, and it unlocks your app's channel in our server.</p>
+    <!-- EU rule for digital products: the buyer agrees, before paying, that the right to cancel ends once the key is used -->
+    <label class="agree"><input type="checkbox" id="agree"><span>I agree to the <a href="/terms">Terms</a>, and I understand that my right to a refund ends when I activate my key (see <a href="/refunds">Refunds</a>).</span></label>
+    <div class="hero__actions"><button class="btn btn--primary btn--discord" type="button" id="login">Log in with Discord</button></div>
+  </div>
+
+  <div id="join" hidden>
+    <h1 class="h1">Join our Discord first</h1>
+    <p class="lead">Discord only lets us message people in our server, and that's where your key and downloads go.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary btn--discord" href="https://discord.gg/vantatweaks" target="_blank" rel="noopener">Join Discord</a>
+      <button class="btn btn--ghost" type="button" id="joined">I've joined</button>
+    </div>
+  </div>
+
+  <div id="go" hidden>
+    <span class="eyebrow">Step 2 of 2</span>
+    <h1 class="h1">Hi <span id="who"></span></h1>
+    <p class="lead">Taking you to the payment page…</p>
+    <div class="spinner" aria-hidden="true"></div>
+  </div>
+
+  <div id="soon" hidden>
+    <h1 class="h1">Buying opens soon</h1>
+    <p class="lead">We'll post in our Discord the moment it's open.</p>
+    <div class="hero__actions"><a class="btn btn--primary btn--discord" href="https://discord.gg/vantatweaks">Join Discord</a></div>
+  </div>
+
+  <div id="oops" hidden>
+    <h1 class="h1">That didn't work</h1>
+    <p class="lead">The Discord login was cancelled or ran out.</p>
+    <div class="hero__actions"><button class="btn btn--primary btn--discord" type="button" id="retry">Try again</button></div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a class="logo" href="/" aria-label="Vanta Tweaks home"><svg viewBox="0 0 388 60" aria-hidden="true"><path fill="currentColor" d="M0 0H15L32 42L49 0H64L40 60H24Z M102 0H118L142 60H127L110 18L93 60H78Z M156 0H170L198 37V0H212V60H198L170 23V60H156Z M226 0H282V13H261V60H247V13H226Z M320 0H336L360 60H345L328 18L311 60H296Z"/><circle fill="#FF4D2E" cx="381" cy="53" r="7"/></svg></a>
+      <p><a href="mailto:support@vantatweaks.com">support@vantatweaks.com</a></p>
+    </div>
+    <nav aria-label="Apps">
+      <h2>Apps</h2>
+      <a href="/bios-tuner">BIOS Tuner</a>
+      <a href="/pc-check">PC Check (free)</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <nav aria-label="Your account">
+      <h2>Your account</h2>
+      <a href="/account">My keys</a>
+      <a href="https://discord.gg/vantatweaks">Discord and support</a>
+    </nav>
+    <nav aria-label="Legal">
+      <h2>Legal</h2>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refunds">Refunds</a>
+    </nav>
+  </div>
+  <div class="wrap foot__bar">
+    <span>© 2026 Vanta Tweaks</span>
+  </div>
+</footer>
+<script src="auth.js?v=4"></script>
+<script>
+// Buy flow: Discord login (auth.js; Discord sends every login back to this page), then Stripe's checkout with your
+// Discord id attached, so the bot can DM you the key. Logged in already? Straight on to the checkout.
+// Checkout links: LIVE for everyone, TEST (Stripe sandbox) only for testers (staff). The server also refuses sandbox
+// orders from anyone else, so these links being public gives nothing away.
+const LIVE = {     // the real shop (Stripe live mode)
+  "bios-1m": "https://buy.stripe.com/aFa3cvf2J6mQblX5b98Ra01",
+  "bios-3m": "https://buy.stripe.com/fZu9AT8El26AgGhgTR8Ra03",
+  "bios-1y": "https://buy.stripe.com/bJedR9g6N3aE75Hbzx8Ra02",
+  "bios-life": "https://buy.stripe.com/3cI9AT3k112wgGh6fd8Ra00"
+};
+const TEST = {
+  "bios-1m": "https://buy.stripe.com/test_cNifZjeHabyUf7vf961oI00",
+  "bios-3m": "https://buy.stripe.com/test_7sY7sN56A8mI9Nb2mk1oI01",
+  "bios-1y": "https://buy.stripe.com/test_fZucN7gPi5aw2kJ4us1oI02",
+  "bios-life": "https://buy.stripe.com/test_cNidRbgPicCY5wVd0Y1oI03"
+};
+const NAMES = { 'bios-1m': 'BIOS Tuner · 1 month · €8', 'bios-3m': 'BIOS Tuner · 3 months · €12', 'bios-1y': 'BIOS Tuner · 1 year · €20',
+                'bios-life': 'BIOS Tuner · Lifetime · €30' };   // moving to a new PC isn't sold: a ticket, done by staff
+const show = id => document.querySelectorAll('main > div').forEach(d => d.hidden = d.id !== id);
+
+async function buy(token, r, sku) {
+  if (!r) return show('oops');
+  if (!r.member) {
+    show('join');
+    document.getElementById('joined').onclick = async () => { show('wait'); buy(token, await Vanta.me(token), sku); };
+    return;
+  }
+  const link = LIVE[sku] || (r.tester && TEST[sku]);
+  if (!link) return show('soon');
+  document.getElementById('who').textContent = r.name;
+  show('go');
+  setTimeout(() => { location.href = link + '?client_reference_id=' + encodeURIComponent(r.id); }, 900);
+}
+
+(async () => {
+  const back = Vanta.callback();
+  if (back) {   // coming back from Discord
+    document.getElementById('retry').onclick = () => Vanta.login(back.next);
+    if (!back.ok) return show('oops');
+    const r = await Vanta.me(back.token);
+    if (!r) return show('oops');
+    Vanta.save(back.token, back.expiresIn, r);
+    if (!NAMES[back.next.sku]) return location.replace(/^\/(?!\/)/.test(back.next.after) ? back.next.after : '/');   // a plain "Log in"
+    return buy(back.token, r, back.next.sku);
+  }
+  const sku = new URLSearchParams(location.search).get('sku');
+  if (!NAMES[sku]) return show('soon');
+  // Every purchase starts here, logged in or not, so the buyer always ticks the box first
+  const s = Vanta.session(), btn = document.getElementById('login'), agree = document.getElementById('agree');
+  const [app, ...plan] = NAMES[sku].split(' · ');   // "BIOS Tuner" big, "1 year · €20" under it
+  document.getElementById('what').textContent = app;
+  document.getElementById('what2').textContent = plan.join(' · ');
+  if (s) {
+    btn.textContent = 'Continue to payment';
+    btn.classList.remove('btn--discord');
+    document.getElementById('startlead').textContent = `Logged in with Discord as ${s.name}. Your key comes to your Discord DMs.`;
+  }
+  agree.onchange = () => agree.parentElement.classList.remove('agree--need');
+  btn.onclick = async () => {
+    if (!agree.checked) { agree.parentElement.classList.add('agree--need'); return agree.focus(); }
+    if (s) {
+      show('wait');
+      const r = await Vanta.me(s.token);
+      if (r) return buy(s.token, r, sku);
+    }
+    Vanta.login({ sku });
+  };
+  show('start');
+})();
+</script>
+</body>
+</html>
