@@ -1,0 +1,24 @@
+# Vanta Tweaks
+
+> Windows apps that tune a gaming PC: BIOS Tuner and Core Tuner, plus the free Latency Lab, which measures a game
+> before and after any tweak.
+
+## Apps
+
+- [BIOS Tuner](https://vantatweaks.com/bios-tuner): reads all BIOS settings, including hidden ones, and tunes the ones that matter for gaming for your CPU and board, with three
+  presets (Safe, Recommended, Max). Shows every change first, saves a backup and restores it in one click. Works on
+  desktop PCs with an AMI BIOS (most ASUS, MSI, Gigabyte and ASRock boards), not on most laptops.
+  Prices (EUR, VAT included): 1 month 8, 3 months 12, 1 year 20, lifetime 30. One key, one PC.
+- [Core Tuner](https://vantatweaks.com/core-tuner): keeps a game's busiest threads on the fastest CPU cores while it
+  runs. A small tray app with a list of your games; warns before boosting games with strict anti-cheat. Prices (EUR, VAT
+  included): 1 month 5, 3 months 8, 1 year 12, lifetime 20. One key, one PC.
+- [Latency Lab](https://vantatweaks.com/latency-lab): free. Measures a game before and after a tweak: FPS, 1% and 0.1%
+  lows, PC latency, stutters, GPU temperature and clock, CPU speed and throttling. Changes nothing.
+- Coming later: Windows Tuner, Network Tuner, GPU Tuner, game packs.
+
+## Buying and help
+
+- Buyers log in with Discord on the website and pay through Stripe. The key arrives in their Discord DMs.
+- Help: [Discord server](https://discord.gg/vantatweaks) or support@vantatweaks.com.
+- [Terms](https://vantatweaks.com/terms), [Privacy](https://vantatweaks.com/privacy),
+  [Refunds](https://vantatweaks.com/refunds)
